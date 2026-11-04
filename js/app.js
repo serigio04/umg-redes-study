@@ -178,3 +178,78 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// --- MÓDULO: ANÁLISIS DE RESULTADOS ---
+function renderResultados() {
+    const container = document.getElementById('resultados-container');
+    const respuestas = QuizState.respuestasUsuario;
+    
+    if (respuestas.length === 0) {
+        container.innerHTML = `<p style="text-align:center;">Aún no has realizado ninguna prueba. Ve a la sección de Pruebas para comenzar.</p>`;
+        return;
+    }
+
+    // Calcular estadísticas
+    const total = respuestas.length;
+    const correctas = respuestas.filter(r => r.esCorrecta).length;
+    const porcentaje = Math.round((correctas / total) * 100);
+
+    // Identificar áreas de mejora (temas donde hubo errores)
+    const errores = respuestas.filter(r => !r.esCorrecta);
+    const temasAmejorar = [...new Set(errores.map(r => r.pregunta.tema))];
+
+    // Construir interfaz
+    let html = `
+        <div class="results-header">
+            <div class="score-circle ${porcentaje >= 70 ? 'score-pass' : 'score-fail'}">
+                <h2>${porcentaje}%</h2>
+                <p>${correctas} de ${total}</p>
+            </div>
+            <div class="score-message">
+                <h3>${porcentaje >= 70 ? '¡Buen trabajo!' : 'Necesitas repasar un poco más.'}</h3>
+            </div>
+        </div>
+    `;
+
+    // Sección de Puntos de Mejora
+    if (temasAmejorar.length > 0) {
+        html += `
+            <div class="improvement-box">
+                <h4>⚠️ Puntos a Mejorar</h4>
+                <p>Te recomendamos repasar los siguientes módulos:</p>
+                <ul>
+                    ${temasAmejorar.map(tema => `<li>Módulo: <b>${tema.toUpperCase()}</b></li>`).join('')}
+                </ul>
+                <button class="btn-small" onclick="navigateTo('temas')">Ir a estudiar</button>
+            </div>
+        `;
+    }
+
+    // Revisión detallada de cada pregunta
+    html += `<div class="review-section"><h4>Revisión Detallada</h4>`;
+    
+    respuestas.forEach((item, index) => {
+        const p = item.pregunta;
+        const claseEstado = item.esCorrecta ? 'review-correct' : 'review-incorrect';
+        const icono = item.esCorrecta ? '✅' : '❌';
+
+        html += `
+            <div class="review-card ${claseEstado}">
+                <p class="review-q"><b>${index + 1}.</b> ${p.pregunta}</p>
+                <p class="review-a">Tu respuesta: <span>${p.opciones[item.seleccion]}</span> ${icono}</p>
+                ${!item.esCorrecta ? `<p class="review-correct-a">Respuesta correcta: <b>${p.opciones[p.respuestaCorrecta]}</b></p>` : ''}
+                <div class="review-explanation">
+                    <small><b>Explicación:</b> ${p.explicacion}</small>
+                </div>
+            </div>
+        `;
+    });
+
+    html += `</div>
+        <div style="text-align: center; margin-top: 2rem;">
+            <button class="btn-primary" onclick="iniciarPrueba()">Repetir Prueba</button>
+        </div>
+    `;
+
+    container.innerHTML = html;
+}
