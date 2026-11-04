@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyApp - Examen de Redes</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Barra de Navegación -->
+    <nav class="navbar">
+        <div class="logo">RedesStudy Pro</div>
+        <ul class="nav-links">
+            <li><button onclick="navigateTo('temas')">📚 Temas</button></li>
+            <li><button onclick="navigateTo('flashcards')">🗂️ Flashcards</button></li>
+            <li><button onclick="navigateTo('pruebas')">📝 Pruebas</button></li>
+            <li><button onclick="navigateTo('resultados')">📊 Resultados</button></li>
+        </ul>
+    </nav>
+
+    <!-- Contenedor Principal -->
+    <main id="app-content">
+        
+        <!-- Sección: Temas de Estudio -->
+        <section id="temas" class="view-section active">
+            <h2>Temas de Estudio</h2>
+            <p>Selecciona un módulo para repasar la teoría.</p>
+            <div id="temas-container" class="grid-container"></div>
+        </section>
+
+        <!-- Sección: Flashcards -->
+        <section id="flashcards" class="view-section hidden">
+            <h2>Flashcards</h2>
+            <div id="flashcard-container"></div>
+        </section>
+
+        <!-- Sección: Pruebas -->
+        <section id="pruebas" class="view-section hidden">
+            <h2>Prueba de Conocimientos</h2>
+            <div id="pruebas-container"></div>
+        </section>
+
+        <!-- Sección: Resultados -->
+        <section id="resultados" class="view-section hidden">
+            <h2>Análisis de Resultados</h2>
+            <div id="resultados-container"></div>
+        </section>
+
+    </main>
+
+    <!-- Scripts (El orden importa: primero los datos, luego la lógica) -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
