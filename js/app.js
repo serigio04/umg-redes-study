@@ -86,3 +86,95 @@ function renderFlashcards() {
         container.appendChild(flipCard);
     });
 }
+
+// --- ESTADO DE LA PRUEBA ---
+const QuizState = {
+    currentIndex: 0,
+    respuestasUsuario: [],
+    preguntasMezcladas: []
+};
+
+// Función para iniciar la prueba cuando se entra a la sección
+function iniciarPrueba() {
+    QuizState.currentIndex = 0;
+    QuizState.respuestasUsuario = [];
+    // Desordenar las preguntas para que no siempre salgan en el mismo orden
+    QuizState.preguntasMezcladas = [...studyData.preguntas].sort(() => Math.random() - 0.5);
+    
+    renderPregunta();
+}
+
+// Función para renderizar la pregunta actual
+function renderPregunta() {
+    const container = document.getElementById('pruebas-container');
+    const index = QuizState.currentIndex;
+    const total = QuizState.preguntasMezcladas.length;
+
+    // Si ya no hay preguntas, terminar prueba
+    if (index >= total) {
+        finalizarPrueba();
+        return;
+    }
+
+    const pregunta = QuizState.preguntasMezcladas[index];
+
+    container.innerHTML = `
+        <div class="quiz-header">
+            <span>Pregunta ${index + 1} de ${total}</span>
+            <span class="quiz-tag">${pregunta.tema.toUpperCase()}</span>
+        </div>
+        <div class="quiz-body">
+            <h3>${pregunta.pregunta}</h3>
+            <div class="quiz-options">
+                ${pregunta.opciones.map((opcion, i) => `
+                    <button class="option-btn" onclick="guardarRespuesta(${i})">${opcion}</button>
+                `).join('')}
+            </div>
+        </div>
+        <div class="quiz-footer">
+            <p>Lee cuidadosamente antes de seleccionar.</p>
+        </div>
+    `;
+}
+
+// Función para guardar la respuesta y avanzar
+function guardarRespuesta(opcionSeleccionadaIndex) {
+    const preguntaActual = QuizState.preguntasMezcladas[QuizState.currentIndex];
+    
+    QuizState.respuestasUsuario.push({
+        pregunta: preguntaActual,
+        seleccion: opcionSeleccionadaIndex,
+        esCorrecta: opcionSeleccionadaIndex === preguntaActual.respuestaCorrecta
+    });
+
+    QuizState.currentIndex++;
+    renderPregunta();
+}
+
+// Función temporal para finalizar (Se conectará con la Fase 4)
+function finalizarPrueba() {
+    const container = document.getElementById('pruebas-container');
+    container.innerHTML = `
+        <div class="quiz-body" style="text-align: center;">
+            <h3>¡Prueba Finalizada! 🎉</h3>
+            <p>Tus respuestas han sido registradas.</p>
+            <br>
+            <button class="btn-primary" onclick="navigateTo('resultados'); renderResultados();">Ver Análisis de Resultados</button>
+        </div>
+    `;
+}
+
+// Actualizar el DOMContentLoaded para inicializar la prueba cuando hagamos clic en el menú
+document.addEventListener('DOMContentLoaded', () => {
+    // ... lo que ya tenías ...
+    
+    // Interceptar el clic en la navegación para resetear la prueba si entramos ahí
+    const botonesNav = document.querySelectorAll('.nav-links button');
+    botonesNav.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            if (e.target.innerText.includes('Pruebas')) {
+                iniciarPrueba();
+            }
+        });
+    });
+});
