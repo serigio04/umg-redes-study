@@ -6,7 +6,10 @@ const studyData = {
             resumen: 'Tríada CIA, Protocolos, Firewalls, ACLs, Hacking, Intrusión, Spoofing y Sniffing.',
             contenido: `
                 <h3>1. Fundamentos y Tríada CIA</h3>
-                <p><b>Confidencialidad:</b> Cifrado de datos. <b>Integridad:</b> Algoritmos Hash. <b>Disponibilidad:</b> Acceso garantizado. Las amenazas pueden ser <b>Pasivas</b> (Sniffing silencioso) o <b>Activas</b> (Modificación, DoS).</p>
+                <p><b>Confidencialidad:</b> Cifrado de datos. 
+                <b>Integridad:</b> Algoritmos Hash. 
+                <b>Disponibilidad:</b> Acceso garantizado. 
+                Las amenazas pueden ser <b>Pasivas</b> (Sniffing silencioso) o <b>Activas</b> (Modificación, DoS).</p>
                 
                 <h3>2. Protocolos de Seguridad</h3>
                 <ul>
