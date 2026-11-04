@@ -247,7 +247,7 @@ function renderResultados() {
 
     html += `</div>
         <div style="text-align: center; margin-top: 2rem;">
-            <button class="btn-primary" onclick="iniciarPrueba()">Repetir Prueba</button>
+            <button class="btn-primary" onclick="navigateTo('pruebas'); iniciarPrueba();">Repetir Prueba</button>
         </div>
     `;
 
