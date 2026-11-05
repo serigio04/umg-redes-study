@@ -98,8 +98,11 @@ const QuizState = {
 function iniciarPrueba() {
     QuizState.currentIndex = 0;
     QuizState.respuestasUsuario = [];
-    // Desordenar las preguntas para que no siempre salgan en el mismo orden
-    QuizState.preguntasMezcladas = [...studyData.preguntas].sort(() => Math.random() - 0.5);
+    
+    // Mezcla todas las preguntas y recorta el arreglo a un máximo de 12
+    QuizState.preguntasMezcladas = [...studyData.preguntas]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 12);
     
     renderPregunta();
 }

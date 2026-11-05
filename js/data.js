@@ -250,6 +250,78 @@ const studyData = {
             opciones: ['Verdadero', 'Falso'],
             respuestaCorrecta: 0,
             explicacion: 'Verdadero. A diferencia del IDS (que copia tráfico y es pasivo), el IPS va "inline" (en línea) y puede detener paquetes maliciosos en tiempo real.'
+        },
+        {
+            id: 13,
+            tema: 'seguridad',
+            tipo: 'directa',
+            pregunta: '¿Cuál es el objetivo principal de implementar un algoritmo de Hash (como SHA-256) en la seguridad de redes?',
+            opciones: ['Garantizar la Confidencialidad cifrando los datos', 'Garantizar la Integridad validando que los datos no fueron alterados', 'Garantizar la Disponibilidad contra ataques DoS', 'Bloquear el tráfico malicioso automáticamente'],
+            respuestaCorrecta: 1,
+            explicacion: 'Los algoritmos Hash no cifran (no ocultan), sino que generan una firma única del archivo. Si un solo bit cambia, el Hash cambia, garantizando así la Integridad.'
+        },
+        {
+            id: 14,
+            tema: 'seguridad',
+            tipo: 'vf',
+            pregunta: 'El ataque de Sniffing se considera un ataque pasivo porque el atacante solo escucha el tráfico sin alterarlo ni interrumpirlo.',
+            opciones: ['Verdadero', 'Falso'],
+            respuestaCorrecta: 0,
+            explicacion: 'Verdadero. El Sniffing (captura de paquetes) es pasivo y muy difícil de detectar. Se mitiga cifrando la comunicación (ej. usando HTTPS o SSH).'
+        },
+        {
+            id: 15,
+            tema: 'nat',
+            tipo: 'directa',
+            pregunta: 'En la terminología de NAT, ¿qué representa el término "Inside Global" (Local Global)?',
+            opciones: ['La dirección IP privada del host interno', 'La dirección IP pública del destino en Internet', 'La dirección IP pública asignada por el ISP que representa al host interno hacia afuera', 'La dirección MAC del router'],
+            respuestaCorrecta: 2,
+            explicacion: 'Inside Global es la dirección pública (traducida) con la que el mundo exterior ve a tu dispositivo interno.'
+        },
+        {
+            id: 16,
+            tema: 'nat',
+            tipo: 'vf',
+            pregunta: 'La dirección 172.16.50.10 pertenece a un rango de direcciones IPs públicas enrutables en Internet.',
+            opciones: ['Verdadero', 'Falso'],
+            respuestaCorrecta: 1,
+            explicacion: 'Falso. Pertenece al rango de IPs privadas de Clase B (172.16.0.0 a 172.31.255.255) definido en el RFC 1918. Requiere NAT para salir a Internet.'
+        },
+        {
+            id: 17,
+            tema: 'vpn',
+            tipo: 'directa',
+            pregunta: '¿Qué arquitectura VPN requiere la creación de un túnel directo entre todos y cada uno de los nodos de la red?',
+            opciones: ['Hub and Spoke', 'Full Mesh (Malla Completa)', 'Partial Mesh', 'Split Tunnel'],
+            respuestaCorrecta: 1,
+            explicacion: 'En la arquitectura Full Mesh, todos los sitios se conectan directamente con todos. Es muy rápida y tolerante a fallos, pero matemáticamente compleja de escalar.'
+        },
+        {
+            id: 18,
+            tema: 'vpn',
+            tipo: 'vf',
+            pregunta: 'El uso de SSL/TLS VPN requiere siempre la instalación de un cliente VPN dedicado y pesado en el equipo del usuario final.',
+            opciones: ['Verdadero', 'Falso'],
+            respuestaCorrecta: 1,
+            explicacion: 'Falso. Las VPNs SSL/TLS suelen ser "Clientless" (sin cliente), permitiendo el acceso seguro a través de un simple navegador web utilizando HTTPS (puerto 443).'
+        },
+        {
+            id: 19,
+            tema: 'diseno',
+            tipo: 'directa',
+            pregunta: 'En la capa de Distribución, ¿qué protocolo utilizarías si necesitas balanceo de carga real entre varios routers además de redundancia?',
+            opciones: ['HSRP (Hot Standby Router Protocol)', 'STP (Spanning Tree Protocol)', 'GLBP (Gateway Load Balancing Protocol)', 'VRRP'],
+            respuestaCorrecta: 2,
+            explicacion: 'Mientras HSRP y VRRP funcionan en modo Activo/Standby (un router trabaja y el otro espera), GLBP permite usar el ancho de banda de todos los routers simultáneamente.'
+        },
+        {
+            id: 20,
+            tema: 'diseno',
+            tipo: 'directa',
+            pregunta: 'Dentro de la arquitectura modular de Cisco, ¿en qué módulo se ubican los firewalls perimetrales y la DMZ (Zona Desmilitarizada)?',
+            opciones: ['Módulo de Campus', 'Módulo de Data Center', 'Módulo de Internet Edge (Borde de Internet)', 'Módulo de Gestión'],
+            respuestaCorrecta: 2,
+            explicacion: 'El Internet Edge es la frontera entre la red corporativa y el mundo exterior, por lo que es el lugar exacto para filtrar tráfico externo y exponer servidores públicos en la DMZ.'
         }
     ]
 };
