@@ -322,6 +322,93 @@ const studyData = {
             opciones: ['Módulo de Campus', 'Módulo de Data Center', 'Módulo de Internet Edge (Borde de Internet)', 'Módulo de Gestión'],
             respuestaCorrecta: 2,
             explicacion: 'El Internet Edge es la frontera entre la red corporativa y el mundo exterior, por lo que es el lugar exacto para filtrar tráfico externo y exponer servidores públicos en la DMZ.'
+        },
+        {
+            id: 101,
+            tema: 'subnetting',
+            tipo: 'directa',
+            pregunta: 'Si tienes la dirección IP 192.168.1.0/27, ¿cuántos hosts utilizables tienes por subred y cuál es el salto de red?',
+            opciones: [
+                '32 hosts utilizables, salto de 32', 
+                '30 hosts utilizables, salto de 32', 
+                '30 hosts utilizables, salto de 64', 
+                '62 hosts utilizables, salto de 64'
+            ],
+            respuestaCorrecta: 1,
+            explicacion: 'Una máscara /27 deja 5 bits para hosts (32-27=5). 2^5 = 32 direcciones totales. Restando la dirección de red y la de broadcast, quedan 30 hosts utilizables. El salto entre subredes es de 32.'
+        },
+        {
+            id: 102,
+            tema: 'enrutamiento',
+            tipo: 'directa',
+            pregunta: '¿Cuál de los siguientes protocolos de enrutamiento utiliza el algoritmo DUAL para calcular la ruta más corta y es propietario de Cisco?',
+            opciones: ['OSPF', 'BGP', 'EIGRP', 'RIPv2'],
+            respuestaCorrecta: 2,
+            explicacion: 'EIGRP (Enhanced Interior Gateway Routing Protocol) es un protocolo vector distancia avanzado propietario de Cisco que utiliza el algoritmo DUAL (Diffusing Update Algorithm).'
+        },
+        {
+            id: 103,
+            tema: 'capa_enlace',
+            tipo: 'directa',
+            pregunta: 'En el protocolo STP (Spanning Tree Protocol), ¿qué métrica se utiliza principalmente para elegir el Root Bridge?',
+            opciones: [
+                'La dirección IP más baja', 
+                'La dirección MAC más alta', 
+                'El Bridge ID (Prioridad + Dirección MAC) más bajo', 
+                'El costo de puerto más bajo'
+            ],
+            respuestaCorrecta: 2,
+            explicacion: 'El Root Bridge se elige basándose en el Bridge ID más bajo. El Bridge ID se compone de una prioridad configurable (por defecto 32768) y la dirección MAC del switch.'
+        },
+        {
+            id: 104,
+            tema: 'ipv6',
+            tipo: 'directa',
+            pregunta: '¿Qué prefijo se utiliza en IPv6 para identificar las direcciones Link-Local (enlace local) que se autoconfiguran en las interfaces?',
+            opciones: ['FC00::/7', 'FE80::/10', '2000::/3', 'FF00::/8'],
+            respuestaCorrecta: 1,
+            explicacion: 'Las direcciones FE80::/10 son Link-Local en IPv6. Se usan para la comunicación dentro de un mismo segmento de red local y no son enrutables.'
+        },
+        {
+            id: 105,
+            tema: 'capa_transporte',
+            tipo: 'directa',
+            pregunta: 'Durante el establecimiento de una conexión TCP (Three-Way Handshake), ¿qué banderas (flags) se envían en el segundo paso del proceso?',
+            opciones: ['SYN', 'ACK', 'SYN, ACK', 'FIN, ACK'],
+            respuestaCorrecta: 2,
+            explicacion: 'El proceso es: 1) Cliente envía SYN. 2) Servidor responde con SYN y ACK. 3) Cliente confirma con ACK.'
+        },
+        {
+            id: 106,
+            tema: 'vlan_trunking',
+            tipo: 'directa',
+            pregunta: '¿Qué estándar del IEEE define la inserción de una etiqueta (tag) de 4 bytes en las tramas Ethernet para identificar la pertenencia a una VLAN?',
+            opciones: ['IEEE 802.1D', 'IEEE 802.3ad', 'IEEE 802.1Q', 'IEEE 802.1X'],
+            respuestaCorrecta: 2,
+            explicacion: '802.1Q es el estándar que inserta el tag de VLAN en la cabecera Ethernet original. 802.1D es STP, 802.3ad es LACP (Link Aggregation) y 802.1X es control de acceso de red.'
+        },
+        {
+            id: 107,
+            tema: 'nat',
+            tipo: 'directa',
+            pregunta: '¿Qué técnica permite que múltiples dispositivos en una red local privada compartan una única dirección IP pública utilizando distintos números de puerto?',
+            opciones: ['NAT Estático', 'Dynamic NAT', 'PAT (NAT Overload)', 'Port Forwarding'],
+            respuestaCorrecta: 2,
+            explicacion: 'PAT (Port Address Translation) o NAT Overload mapea múltiples IPs privadas a una sola IP pública utilizando diferentes puertos de origen para diferenciar las sesiones.'
+        },
+        {
+            id: 108,
+            tema: 'modelo_osi',
+            tipo: 'directa',
+            pregunta: 'Cuando un router recibe un paquete y determina que el TTL (Time to Live) ha llegado a 0, ¿qué acción toma y en qué capa ocurre?',
+            opciones: [
+                'Descarta el paquete y envía un mensaje ICMP Time Exceeded (Capa 3)', 
+                'Retransmite el paquete pidiendo un aumento de TTL (Capa 4)', 
+                'Descarta el paquete silenciosamente (Capa 2)', 
+                'Envía el paquete al Root Bridge (Capa 2)'
+            ],
+            respuestaCorrecta: 0,
+            explicacion: 'El TTL opera en la Capa 3 (Red). Cuando llega a 0, el router descarta el paquete para evitar bucles infinitos y notifica al origen mediante un mensaje ICMP Time Exceeded.'
         }
     ]
 };
