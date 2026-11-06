@@ -3,33 +3,45 @@ const AppState = {
     currentView: 'temas'
 };
 
+const viewIds = ['temas', 'flashcards', 'pruebas', 'resultados'];
+
 /**
  * Función para navegar entre las diferentes secciones de la SPA.
  * @param {string} viewId - El ID de la sección HTML a mostrar ('temas', 'flashcards', 'pruebas', 'resultados')
  */
-function navigateTo(viewId) {
-    // 1. Ocultar todas las secciones
-    const sections = document.querySelectorAll('.view-section');
-    sections.forEach(section => {
-        section.classList.remove('active');
-        section.classList.add('hidden');
+function navigateTo(viewId, updateUrl = true) {
+    if (!viewIds.includes(viewId)) return;
+    document.querySelectorAll('.view-section').forEach(section => {
+        section.classList.toggle('active', section.id === viewId);
+        section.classList.toggle('hidden', section.id !== viewId);
     });
-
-    // 2. Mostrar la sección solicitada
-    const activeSection = document.getElementById(viewId);
-    if (activeSection) {
-        activeSection.classList.remove('hidden');
-        activeSection.classList.add('active');
-        AppState.currentView = viewId;
-    }
+    AppState.currentView = viewId;
+    if (updateUrl && location.hash !== `#${viewId}`) location.hash = viewId;
 }
 
 // Inicialización de la app al cargar el DOM
 document.addEventListener('DOMContentLoaded', () => {
-    navigateTo('temas');
     renderTemas();
     renderFlashcards();
+    window.addEventListener('hashchange', syncRoute);
+    syncRoute();
+    if (!location.hash) location.hash = 'temas';
+    document.querySelectorAll('.nav-links button').forEach(button => {
+        button.addEventListener('click', event => {
+            const label = event.currentTarget.textContent;
+            if (label.includes('Pruebas')) iniciarPrueba();
+            if (label.includes('Resultados')) renderResultados();
+        });
+    });
 });
+
+function syncRoute() {
+    const requestedView = location.hash.slice(1);
+    const viewId = viewIds.includes(requestedView) ? requestedView : 'temas';
+    navigateTo(viewId, false);
+    if (viewId === 'pruebas' && QuizState.preguntasMezcladas.length === 0) iniciarPrueba();
+    if (viewId === 'resultados') renderResultados();
+}
 
 // --- MÓDULO: TEMAS DE ESTUDIO ---
 function renderTemas() {
@@ -166,21 +178,6 @@ function finalizarPrueba() {
         </div>
     `;
 }
-
-// Actualizar el DOMContentLoaded para inicializar la prueba cuando hagamos clic en el menú
-document.addEventListener('DOMContentLoaded', () => {
-    // ... lo que ya tenías ...
-    
-    // Interceptar el clic en la navegación para resetear la prueba si entramos ahí
-    const botonesNav = document.querySelectorAll('.nav-links button');
-    botonesNav.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            if (e.target.innerText.includes('Pruebas')) {
-                iniciarPrueba();
-            }
-        });
-    });
-});
 
 // --- MÓDULO: ANÁLISIS DE RESULTADOS ---
 function renderResultados() {
