@@ -3,53 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyApp - Examen de Redes</title>
+    <meta name="description" content="Accede a tus guías interactivas de estudio.">
+    <title>StudyHub | Guías de estudio</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Barra de Navegación -->
-    <nav class="navbar">
-        <div class="logo">RedesStudy Pro</div>
-        <ul class="nav-links">
-            <li><button onclick="navigateTo('temas')">📚 Temas</button></li>
-            <li><button onclick="navigateTo('flashcards')">🗂️ Flashcards</button></li>
-            <li><button onclick="navigateTo('pruebas')">📝 Pruebas</button></li>
-            <li><button onclick="navigateTo('resultados')">📊 Resultados</button></li>
-        </ul>
-    </nav>
-
-    <!-- Contenedor Principal -->
-    <main id="app-content">
-        
-        <!-- Sección: Temas de Estudio -->
-        <section id="temas" class="view-section active">
-            <h2>Temas de Estudio</h2>
-            <p>Selecciona un módulo para repasar la teoría.</p>
-            <div id="temas-container" class="grid-container"></div>
+    <header class="site-header">
+        <a class="brand" href="./" aria-label="StudyHub, inicio">
+            <span class="brand-mark" aria-hidden="true">S</span>
+            <span>StudyHub</span>
+        </a>
+        <span class="header-caption">Tu espacio de aprendizaje</span>
+    </header>
+    <main>
+        <section class="welcome">
+            <p class="eyebrow">BIBLIOTECA DE ESTUDIO</p>
+            <h1>Aprende a tu ritmo.</h1>
+            <p class="welcome-copy">Elige una guía para repasar conceptos, practicar con tarjetas y poner a prueba lo aprendido.</p>
         </section>
-
-        <!-- Sección: Flashcards -->
-        <section id="flashcards" class="view-section hidden">
-            <h2>Flashcards</h2>
-            <div id="flashcard-container"></div>
+        <section class="guides" aria-labelledby="guides-title">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">TUS MATERIAS</p>
+                    <h2 id="guides-title">Guías disponibles</h2>
+                </div>
+                <span class="guide-count">02 guías</span>
+            </div>
+            <div class="guide-grid">
+                <article class="guide-card network-card">
+                    <div class="guide-icon" aria-hidden="true">⌁</div>
+                    <p class="guide-category">TECNOLOGÍA · REDES</p>
+                    <h3>Redes</h3>
+                    <p>Seguridad, NAT, VPN, diseño de redes y servicios en la nube.</p>
+                    <a class="guide-link" href="Redes/">Abrir guía <span aria-hidden="true">→</span></a>
+                </article>
+                <article class="guide-card web-card">
+                    <div class="guide-icon" aria-hidden="true">&lt;/&gt;</div>
+                    <p class="guide-category">TECNOLOGÍA · DESARROLLO</p>
+                    <h3>Desarrollo web</h3>
+                    <p>APIs con Spring Boot, seguridad de aplicaciones y despliegue en la nube.</p>
+                    <a class="guide-link" href="Desarrollo_web/">Abrir guía <span aria-hidden="true">→</span></a>
+                </article>
+            </div>
         </section>
-
-        <!-- Sección: Pruebas -->
-        <section id="pruebas" class="view-section hidden">
-            <h2>Prueba de Conocimientos</h2>
-            <div id="pruebas-container"></div>
-        </section>
-
-        <!-- Sección: Resultados -->
-        <section id="resultados" class="view-section hidden">
-            <h2>Análisis de Resultados</h2>
-            <div id="resultados-container"></div>
-        </section>
-
     </main>
-
-    <!-- Scripts (El orden importa: primero los datos, luego la lógica) -->
-    <script src="js/data.js"></script>
-    <script src="js/app.js"></script>
+    <footer><span>StudyHub</span><span>Guías interactivas para aprender mejor</span></footer>
 </body>
 </html>
