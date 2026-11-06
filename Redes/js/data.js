@@ -121,6 +121,55 @@ const studyData = {
                     <li><b>Modelos:</b> IaaS (Máquinas Virtuales), PaaS (Plataformas para Devs), SaaS (Software final como Zoom/O365).</li>
                 </ul>
             `
+        },
+        {
+            id: 'direccionamiento',
+            titulo: 'Direccionamiento: Subnetting e IPv6',
+            resumen: 'Cálculo de subredes IPv4, saltos de red y prefijos especiales de IPv6.',
+            contenido: `
+                <h3>1. Subnetting en IPv4</h3>
+                <p>El subnetting divide una red grande en subredes más pequeñas. La fórmula para encontrar los hosts utilizables es <b>2^n - 2</b> (donde <i>n</i> son los bits de host). Se restan 2 porque la primera IP es la dirección de red y la última es el broadcast.</p>
+                <ul>
+                    <li><b>Ejemplo /27:</b> Deja 5 bits para hosts (32-27=5). 2^5 = 32 IPs totales. Hosts utilizables: <b>30</b>. El "salto" entre redes es de 32 (ej. .0, .32, .64).</li>
+                </ul>
+                <br>
+                <h3>2. Fundamentos de IPv6</h3>
+                <p>IPv6 utiliza 128 bits expresados en formato hexadecimal. Elimina el broadcast y depende del multicast. Prefijos clave:</p>
+                <ul>
+                    <li><b>Link-Local (FE80::/10):</b> Autoconfiguradas, no enrutables, usadas para comunicación en la misma subred.</li>
+                    <li><b>Global Unicast (2000::/3):</b> Equivalentes a las IPs públicas en IPv4.</li>
+                    <li><b>Unique Local (FC00::/7):</b> Equivalentes a las IPs privadas de IPv4 (RFC 1918).</li>
+                </ul>
+            `
+        },
+        {
+            id: 'enrutamiento_osi',
+            titulo: 'Enrutamiento y Modelo OSI',
+            resumen: 'Protocolos de enrutamiento (EIGRP, OSPF), STP, VLAN Trunking y el Three-Way Handshake.',
+            contenido: `
+                <h3>1. Protocolos de Enrutamiento (Capa 3)</h3>
+                <ul>
+                    <li><b>EIGRP:</b> Protocolo avanzado propietario de Cisco. Utiliza el algoritmo <b>DUAL</b> para calcular la ruta más corta y libre de bucles.</li>
+                    <li><b>OSPF:</b> Protocolo de estado de enlace, estándar abierto, basado en el algoritmo de Dijkstra (SPF).</li>
+                </ul>
+                <br>
+                <h3>2. Conceptos de Capa 3: TTL</h3>
+                <p>El <b>Time to Live (TTL)</b> evita que los paquetes viajen infinitamente por la red. Cada vez que un router procesa el paquete, resta 1 al TTL. Si llega a 0, el router descarta el paquete y envía un mensaje <b>ICMP Time Exceeded</b> al origen.</p>
+                <br>
+                <h3>3. Switching y Capa de Enlace (Capa 2)</h3>
+                <ul>
+                    <li><b>STP (Spanning Tree Protocol):</b> Evita bucles en switches. Elige un <b>Root Bridge</b> basándose en el Bridge ID más bajo (Prioridad + Dirección MAC).</li>
+                    <li><b>802.1Q (VLAN Trunking):</b> Estándar IEEE que inserta una etiqueta (tag) de 4 bytes en la trama Ethernet original para identificar a qué VLAN pertenece el tráfico que cruza un enlace troncal.</li>
+                </ul>
+                <br>
+                <h3>4. Capa de Transporte (Capa 4)</h3>
+                <p>TCP es orientado a conexión y garantiza la entrega mediante el <b>Three-Way Handshake</b> (Apretón de manos de 3 vías):</p>
+                <ol>
+                    <li>El cliente envía un segmento con la bandera <b>SYN</b>.</li>
+                    <li>El servidor responde con <b>SYN, ACK</b>.</li>
+                    <li>El cliente confirma la conexión con <b>ACK</b>.</li>
+                </ol>
+            `
         }
     ],
 
@@ -139,7 +188,14 @@ const studyData = {
         { id: 12, tema: 'diseno', pregunta: '¿Qué es un Núcleo Comprimido (Collapsed Core)?', respuesta: 'Diseño para PyMEs que fusiona la capa de Distribución y Núcleo en un solo equipo.' },
         { id: 13, tema: 'diseno', pregunta: 'Diferencia entre HSRP y GLBP', respuesta: 'Ambos dan redundancia (Distribución). HSRP es Activo/Standby. GLBP permite balanceo de carga real entre routers.' },
         { id: 14, tema: 'diseno', pregunta: '¿Qué separa el paradigma SDN?', respuesta: 'Separa el Plano de Control (cerebro/decisiones) del Plano de Datos (hardware/reenvío).' },
-        { id: 15, tema: 'diseno', pregunta: 'CAPEX vs OPEX en Cloud', respuesta: 'CAPEX (On-Premise) es gasto inicial fuerte en hardware. OPEX (Cloud Pública) es gasto operativo por consumo/suscripción.' }
+        { id: 15, tema: 'diseno', pregunta: 'CAPEX vs OPEX en Cloud', respuesta: 'CAPEX (On-Premise) es gasto inicial fuerte en hardware. OPEX (Cloud Pública) es gasto operativo por consumo/suscripción.' },
+        { id: 16, tema: 'direccionamiento', pregunta: '¿Fórmula para calcular hosts utilizables en IPv4?', respuesta: '2^n - 2 (donde n son los bits de host). Se restan 2 por la IP de red y la de broadcast.' },
+        { id: 17, tema: 'direccionamiento', pregunta: '¿Qué tipo de dirección IPv6 es FE80::/10?', respuesta: 'Link-Local. Se autoconfigura y sirve solo para comunicación en el mismo segmento de red local (no es enrutable).' },
+        { id: 18, tema: 'enrutamiento_osi', pregunta: '¿Qué algoritmo utiliza EIGRP?', respuesta: 'El algoritmo DUAL (Diffusing Update Algorithm) para calcular rutas eficientes y sin bucles.' },
+        { id: 19, tema: 'enrutamiento_osi', pregunta: '¿Cómo elige STP (Spanning Tree Protocol) al Root Bridge?', respuesta: 'Buscando el Bridge ID más bajo en la red. El Bridge ID es la suma de la Prioridad (por defecto 32768) + la dirección MAC del switch.' },
+        { id: 20, tema: 'enrutamiento_osi', pregunta: '¿Qué hace el estándar IEEE 802.1Q?', respuesta: 'Es el estándar de VLAN Trunking. Inserta un Tag de 4 bytes en las tramas Ethernet para identificar de qué VLAN provienen.' },
+        { id: 21, tema: 'enrutamiento_osi', pregunta: '¿Cuáles son los 3 pasos del TCP Three-Way Handshake?', respuesta: '1. SYN (Sincronizar) | 2. SYN, ACK (Sincronizar y Acusar recibo) | 3. ACK (Acusar recibo final).' },
+        { id: 22, tema: 'enrutamiento_osi', pregunta: '¿Qué ocurre cuando el TTL (Time to Live) de un paquete llega a cero?', respuesta: 'El router (Capa 3) descarta el paquete y devuelve un mensaje ICMP "Time Exceeded" al remitente original.' }
     ],
 
     preguntas: [
