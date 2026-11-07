@@ -61,6 +61,7 @@ main { width: min(1120px, calc(100% - 2.5rem)); margin: 0 auto; }
 .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1.25rem; }
 .guide-card { display: flex; min-height: 290px; flex-direction: column; align-items: flex-start; padding: 1.65rem; border: 1px solid #e5e9f0; border-top: 4px solid var(--primary-color); border-radius: 1rem; background: var(--card-bg); box-shadow: 0 8px 26px rgb(16 24 40 / 5%); }
 .web-card { --primary-color: #0f766e; }
+.electronics-card { --primary-color: #0e7490; }
 .guide-icon { display: grid; min-width: 3rem; height: 3rem; place-items: center; padding: 0 0.55rem; border-radius: 0.8rem; background: color-mix(in srgb, var(--primary-color) 12%, white); color: var(--primary-color); font-size: 1.1rem; font-weight: 800; }
 .guide-category { margin: 1.25rem 0 0.45rem; color: var(--muted-color); font-size: 0.7rem; font-weight: 750; letter-spacing: 0.1em; }
 .guide-card h3 { margin: 0; font-size: 1.45rem; }
